@@ -2,6 +2,7 @@ package com.mangomei.dp.behavioral.observer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 /**
  * 观察对象抽象类
@@ -47,9 +48,21 @@ public abstract class Subject {
     /**
      * 通知所有观察者，并传递参数
      */
-    public void notifyObservers(Object obj) {
+    public void notifyObservers(Object arg) {
         for (Observer observer : observerList) {
-            observer.update(this, obj);
+            observer.update(this, arg);
+        }
+    }
+
+    /**
+     * 异步通知观察者
+     *
+     * @param arg 参数
+     * @param executorService 执行线程池
+     */
+    public void asyncNotifyObservers(Object arg, ExecutorService executorService) {
+        for (Observer observer : observerList) {
+            executorService.submit(() -> observer.update(this, arg));
         }
     }
 }
