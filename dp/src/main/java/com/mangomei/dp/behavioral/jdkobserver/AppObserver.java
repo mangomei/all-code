@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * hello spring
+ * 应用观察者
  *
  * @author mango
  * @since 2024/4/4
